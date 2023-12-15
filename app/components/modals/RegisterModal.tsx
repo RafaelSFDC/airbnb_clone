@@ -33,16 +33,16 @@ const RegisterModal = () => {
     setIsLoading(true);
 
     toast.promise(axios.post("/api/register", data), {
-      loading: "Loading...",
+      loading: "Creating account...",
       success: (response: any) => {
         registerModal.onClose();
         setIsLoading(false);
-        return `${response.data.name} toast has been added`;
+        return `Account created: ${response.data.name}  `;
       },
       error: (error) => {
         setIsLoading(false);
         console.error(error); // Use console.error instead of console.log for errors
-        return "ERROR"; // Rethrow the error to propagate it to the caller
+        return "Account creation failed, please try again"; // Rethrow the error to propagate it to the caller
       },
     });
   };
