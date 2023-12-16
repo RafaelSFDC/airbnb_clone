@@ -5,6 +5,7 @@ import RegisterModal from "./components/modals/RegisterModal";
 import ToasterProvider from "./providers/ToasterProvider";
 import LoginModal from "./components/modals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
+import RentModal from "./components/modals/RentModal";
 export const metadata = {
   title: "Airbnb",
   description: "Airbnb Clone",
@@ -29,6 +30,7 @@ export default async function RootLayout({
         <div className="pb-20 pt-28">{children}</div>
         <RegisterModal />
         <LoginModal />
+        <RentModal />
       </body>
     </html>
   );
