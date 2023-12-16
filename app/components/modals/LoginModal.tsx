@@ -37,6 +37,30 @@ const LoginModal = () => {
     registerModal.onOpen();
   }, [loginModal, registerModal]);
 
+  const loginToast = (platform: string) => {
+    toast.promise(signIn(platform, { redirect: false }), {
+      loading: `Login in with ${platform}...`,
+      success: (response: any) => {
+        if (response?.error) {
+          // Tratar erro aqui se houver
+          setIsLoading(false);
+          console.error(response.error);
+          return "Login failed, please try again";
+        }
+
+        loginModal.onClose();
+        setIsLoading(false);
+        router.refresh();
+        return `logged in successfully, welcome back!`;
+      },
+      error: (error) => {
+        setIsLoading(false);
+        console.error(error);
+        return "Login failed, please try again";
+      },
+    });
+  };
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     toast.promise(signIn("credentials", { ...data, redirect: false }), {
@@ -93,14 +117,14 @@ const LoginModal = () => {
         disabled={isLoading}
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => signIn("google")}
+        onClick={() => loginToast("google")}
       />
       <Button
         outline
         disabled={isLoading}
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => signIn("github")}
+        onClick={() => loginToast("github")}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="justify-center flex flex-row items-center gap-2">
