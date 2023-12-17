@@ -98,7 +98,7 @@ const RentModal = () => {
       },
       error: (error) => {
         setIsLoading(false);
-        return "Listing creation failed, please try again";
+        return "Listing creation failed, please check your data and try again";
       },
     });
   };
