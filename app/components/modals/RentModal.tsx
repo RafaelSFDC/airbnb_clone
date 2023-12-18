@@ -87,7 +87,7 @@ const RentModal = () => {
 
     setIsLoading(true);
     toast.promise(axios.post("/api/listings", data), {
-      loading: "Loading...",
+      loading: "Creating...",
       success: () => {
         router.refresh();
         reset();
