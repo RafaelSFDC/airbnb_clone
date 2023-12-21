@@ -1,16 +1,17 @@
 "use client";
+import { usePathname } from "next/navigation";
 import Container from "../Container";
 import Categories from "./Categories";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
 import { SafeUser } from "@/app/types";
-
 interface NavbarProps {
   currentUser?: SafeUser | null;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+  const pathName = usePathname();
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div
@@ -36,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
           </div>
         </Container>
       </div>
-      <Categories />
+      {pathName && pathName.includes("/listings/") ? null : <Categories />}
     </div>
   );
 };
